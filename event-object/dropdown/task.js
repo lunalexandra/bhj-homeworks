@@ -1,18 +1,23 @@
 const dropdownValue = document.querySelector('.dropdown__value');
 const dropdownList = document.querySelector('.dropdown__list');
-const items = document.querySelectorAll('.dropdown__item');
-const links = document.querySelectorAll('.dropdown__link');
+const items = Array.from(document.querySelectorAll('.dropdown__item'));
 
 function openList() {
-	dropdownList.classList.toggle('dropdown__list_active');
+	dropdownList.classList.add('dropdown__list_active');
+}
+
+function closeList() {
+	dropdownList.classList.remove('dropdown__list_active');
 }
 
 dropdownValue.addEventListener('click', openList);
 
-items.forEach(i => {
+items.forEach((i, index) => {
 	i.addEventListener('click', chooseItem);
-	function chooseItem(){
-		dropdownValue.textContent = i.textContent;
-		return false
+
+	function chooseItem(i) {
+		i.preventDefault();
+		closeList();
+		dropdownValue.textContent = items[index].textContent;
 	}
 });
