@@ -13,5 +13,7 @@ function changePhrase() {
 	if (index < rotatorCase.length) {
 		rotatorCase[index].classList.add('rotator__case_active');
 		return index++;
-	} else return index = 0;
+	} else {
+		return index = 0;
+	}
 }
