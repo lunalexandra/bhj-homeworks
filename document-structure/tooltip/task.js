@@ -1,4 +1,5 @@
 const links = document.querySelectorAll('.has-tooltip');
+let title = null;
 
 links.forEach((element) => {
 	element.addEventListener('click', showTooltip);
@@ -14,14 +15,15 @@ links.forEach((element) => {
 		if (tooltip) {
 			tooltip.remove();
 		}
-		let title = event.target.getAttribute('title');
+
+		if (event.target.getAttribute('title') == title) {
+			return title = null;
+		}
+		title = event.target.getAttribute('title');
 		event.target.insertAdjacentHTML('afterEnd', `<div class="tooltip">${title} </div>`);
 		tooltip = document.querySelector('.tooltip');
 		tooltip.style.top = `${top + 20}px`;
 		tooltip.style.left = `${left}px`;
 		tooltip.classList.add('tooltip_active');
-		element.removeEventListener('click', showTooltip);
 	}
 });
-	
-  
