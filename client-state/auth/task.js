@@ -15,7 +15,6 @@ form.addEventListener('submit', (e) => {
 	e.preventDefault();
 	const xhr = new XMLHttpRequest();
 	xhr.addEventListener('load', () => {
-		if (xhr.readyState === xhr.DONE) {
 			let data = JSON.parse(xhr.response);
 
 			if (data.success) {
@@ -28,13 +27,12 @@ form.addEventListener('submit', (e) => {
 				form.reset();
 				alert(`«Неверный логин/пароль»`);
 			}
-		}
-
-		xhr.onerror = function() {
-			alert(`Ошибка соединения: ${xhr.status}`);
-		};
 	});
 
+	xhr.onerror = function() {
+			alert(`Ошибка соединения: ${xhr.status}`);
+		};
+		
 	xhr.open('POST', 'https://students.netoservices.ru/nestjs-backend/auth');
 
 	const formData = new FormData(form);
